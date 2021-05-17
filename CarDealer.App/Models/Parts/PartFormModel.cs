@@ -1,6 +1,6 @@
 ﻿namespace CarDealer.App.Models.Parts
 {
-    using CarDealer.Services.Models.Suppliers;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -13,12 +13,12 @@
         [Range(1, int.MaxValue)]
         public int Quantity { get; set; }
 
-        [Range(0, double.MaxValue)]
+        [Range(0, double.MaxValue, ErrorMessage = "Price must be positive number.")]
         public double Price { get; set; }
 
         [Display(Name = "Supplier")]
         public int SupplierId { get; set; }
 
-        public IEnumerable<SupplierModel> AllSuppliers { get; set; }
+        public IEnumerable<SelectListItem> Suppliers { get; set; }
     }
 }

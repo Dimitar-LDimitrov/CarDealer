@@ -1,6 +1,7 @@
 ﻿namespace CarDealer.Services.Implementations
 {
     using CarDealer.Data;
+    using CarDealer.Domain;
     using CarDealer.Services.Models.Parts;
     using System.Collections.Generic;
     using System.Linq;
@@ -29,6 +30,20 @@
                 SupplierName = p.Supplier.Name
             })
             .ToList();
+        }
+
+        public void Create(string name, int quantity, double price, int supplierId)
+        {
+            var part = new Part
+            {
+                Name = name,
+                Quantity = quantity > 0 ? quantity : 1,
+                Price = price,
+                SupplierId = supplierId
+            };
+
+            this.db.Parts.Add(part);
+            this.db.SaveChanges();
         }
 
         public int Total() => this.db.Parts.Count();

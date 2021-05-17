@@ -7,6 +7,8 @@
     {
         IEnumerable<PartListingModel> All(int page = 1, int pageSize = 10);
 
+        void Create(string name, int quantity, double price, int supplierId);
+
         int Total();
     }
 }
