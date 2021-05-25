@@ -86,15 +86,15 @@ namespace CarDealer.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: true),
-                    SuplierId = table.Column<int>(type: "int", nullable: false)
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    SupplierId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Parts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Parts_Suppliers_SuplierId",
-                        column: x => x.SuplierId,
+                        name: "FK_Parts_Suppliers_SupplierId",
+                        column: x => x.SupplierId,
                         principalTable: "Suppliers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -130,9 +130,9 @@ namespace CarDealer.Data.Migrations
                 column: "CarId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Parts_SuplierId",
+                name: "IX_Parts_SupplierId",
                 table: "Parts",
-                column: "SuplierId");
+                column: "SupplierId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sales_CarId",

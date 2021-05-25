@@ -1,11 +1,11 @@
 ﻿namespace CarDealer.Services.Implementations
 {
-    using Models.Cars;
     using CarDealer.Data;
+    using CarDealer.Domain;
+    using CarDealer.Services.Models.Parts;
+    using Models.Cars;
     using System.Collections.Generic;
     using System.Linq;
-    using CarDealer.Services.Models;
-    using CarDealer.Services.Models.Parts;
 
     public class CarService : ICarService
     {
@@ -29,6 +29,19 @@
                     TravelledDistance = c.TravelledDistance
                 })
                 .ToList();
+        }
+
+        public void Create(string make, string model, long travelledDistance)
+        {
+            var car = new Car
+            {
+                Make = make,
+                Model = model,
+                TravelledDistance = travelledDistance
+            };
+
+            this.db.Add(car);
+            this.db.SaveChanges();
         }
 
         public IEnumerable<CarsWithPartsModel> WithParts()

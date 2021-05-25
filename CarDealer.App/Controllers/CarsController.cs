@@ -13,12 +13,12 @@
         {
             this.cars = service;
         }
-        
+
         [Route("parts/")]
         public IActionResult Parts()
         {
             return View(this.cars.WithParts());
-        } 
+        }
 
         [Route("{make}")]
         public IActionResult ByMake(string make)
@@ -30,6 +30,26 @@
                 Cars = cars,
                 Make = make
             });
+        }
+
+        [Route(nameof(Create))]
+        public IActionResult Create() => View();
+
+        [HttpPost]
+        [Route(nameof(Create))]
+        public IActionResult Create(CarFormModel carModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(carModel);
+            }
+
+            this.cars.Create(
+                carModel.Make,
+                carModel.Model,
+                carModel.TravelledDistance);
+
+            return RedirectToAction(nameof(Parts));
         }
     }
 }
