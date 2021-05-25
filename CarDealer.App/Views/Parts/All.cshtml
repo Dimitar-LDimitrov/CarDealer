@@ -23,25 +23,31 @@
             <th>
                 Supplier
             </th>
+            <th>
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var part in Model.Parts)
         {
-            <tr>
-                <th>
-                    @part.Name
-                </th>
-                <th>
-                    @part.Price.ToPrice()
-                </th>
-                <th>
-                    @part.Quantity
-                </th>
-                <th>
-                    @part.SupplierName
-                </th>
-            </tr>
+        <tr>
+            <th>
+                @part.Name
+            </th>
+            <th>
+                @part.Price.ToPrice()
+            </th>
+            <th>
+                @part.Quantity
+            </th>
+            <th>
+                @part.SupplierName
+            </th>
+            <th>
+                <a class="btn btn-info" href="/parts/edit/@part.Id">Edit</a>
+                <a class="btn btn-danger" href="/parts/delete/@part.Id">Delete</a>
+            </th>
+        </tr>
         }
     </tbody>
 </table>

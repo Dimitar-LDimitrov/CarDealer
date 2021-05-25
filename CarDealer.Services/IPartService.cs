@@ -9,6 +9,14 @@
 
         void Create(string name, int quantity, double price, int supplierId);
 
+        PartEditModel ById(int id);
+
+        void Edit(int id, double price, int quantity);
+
+        void Delete(int id);
+
+        bool Exists(int id);
+
         int Total();
     }
 }

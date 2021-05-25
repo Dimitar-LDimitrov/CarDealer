@@ -32,6 +32,19 @@
             .ToList();
         }
 
+        public PartEditModel ById(int id)
+        {
+            return this.db.Parts
+                .Where(p => p.Id == id)
+                .Select(p => new PartEditModel
+                {
+                    Name = p.Name,
+                    Price = p.Price,
+                    Quantity = p.Quantity
+                })
+                .FirstOrDefault();
+        }
+
         public void Create(string name, int quantity, double price, int supplierId)
         {
             var part = new Part
@@ -45,6 +58,38 @@
             this.db.Parts.Add(part);
             this.db.SaveChanges();
         }
+
+        public void Delete(int id)
+        {
+            var part = this.db.Parts
+                .Where(p => p.Id == id)
+                .First();
+
+            if (part == null)
+            {
+                return;
+            }
+
+            this.db.Parts.Remove(part);
+            this.db.SaveChanges();
+        }
+
+        public void Edit(int id, double price, int quantity)
+        {
+            var existingPart = this.db.Parts.Find(id);
+
+            if (existingPart == null)
+            {
+                return;
+            }
+
+            existingPart.Quantity = quantity;
+            existingPart.Price = price;
+
+            this.db.SaveChanges();
+        }
+
+        public bool Exists(int id) => this.db.Parts.Any(p => p.Id == id);
 
         public int Total() => this.db.Parts.Count();
     }

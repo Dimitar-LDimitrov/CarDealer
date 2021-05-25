@@ -3,7 +3,14 @@
 <form method="post">
     <div class="form-group">
         <label asp-for="Name">Name</label>
-        <input asp-for="Name" required class="form-control" />
+        @if (Model.isEdit)
+        {
+            <input asp-for="Name" readonly required class="form-control" />
+        }
+        else
+        {
+            <input asp-for="Name" required class="form-control" />
+        }
         <span asp-validation-for="Name" class="form-text text-muted text-danger"></span>
     </div>
     <div class="form-group">
@@ -16,11 +23,14 @@
         <input asp-for="Quantity" required min="1" class="form-control" />
         <span asp-validation-for="Quantity" class="form-text text-muted text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="SupplierId"></label>
-        <select asp-for="SupplierId" asp-items="Model.Suppliers" class="form-control"></select>
-        <span asp-validation-for="SupplierId" class="form-text text-muted text-danger"></span>
-    </div>
+    @if (!Model.isEdit)
+    {
+        <div class="form-group">
+            <label asp-for="SupplierId"></label>
+            <select asp-for="SupplierId" asp-items="Model.Suppliers" class="form-control"></select>
+            <span asp-validation-for="SupplierId" class="form-text text-muted text-danger"></span>
+        </div>
+    }
     <div>
         <input class="btn btn-success" type="submit" value="Save Part" />
     </div>
