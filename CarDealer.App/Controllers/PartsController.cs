@@ -51,7 +51,7 @@
             return View(new PartPageListingModel
             {
                 CurrentPage = page,
-                Parts = this.parts.All(page, PageSize),
+                Parts = this.parts.AllListings(page, PageSize),
                 TotalPage = (int)Math.Ceiling(this.parts.Total() / (double)PageSize)
             });
         }
